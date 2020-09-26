@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, FlatList} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, FlatList, View} from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -20,7 +21,10 @@ const App = () => {
         data={tasks}
         keyExtractor={(task) => task.id}
         renderItem={({item}) => (
-          <Text style={styles.textStyle}>{item.title}</Text>
+          <View style={styles.containerViewStyle}>
+            <CheckBox value={item.isCompleted} />
+            <Text style={styles.textStyle}>{item.title}</Text>
+          </View>
         )}
       />
     </SafeAreaView>
@@ -28,8 +32,12 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  containerViewStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingTop: 16,
+  },
   textStyle: {
-    marginTop: 24,
     fontSize: 24,
   },
 });
