@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, FlatList, View} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import {getTasks} from './src/utils/todoService';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch('https://todo.crudful.com/tasks', {
-      method: 'GET',
-      headers: {cfAccessKey: process.env.CFACCESSKEY},
-    })
-      .then((response) => response.json())
-      .then((json) => setTasks(json.results))
-      .catch((error) => console.error(error));
+    const fetchTasks = async () => {
+      setTasks(await getTasks());
+    };
+
+    fetchTasks();
   }, []);
 
   return (
