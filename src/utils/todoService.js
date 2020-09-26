@@ -9,4 +9,14 @@ const getTasks = async () => {
   return json.results;
 };
 
-export {getTasks};
+const updateTask = async (id, data) => {
+  let response = await fetch(`https://todo.crudful.com/tasks/${id}`, {
+    method: 'PATCH',
+    headers: {cfAccessKey: cfAccessKey, 'Content-Type': 'application/json'},
+    body: JSON.stringify(data),
+  });
+  let task = await response.json();
+  return task;
+};
+
+export {getTasks, updateTask};

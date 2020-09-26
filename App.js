@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, FlatList, View} from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import {getTasks} from './src/utils/todoService';
+import {getTasks, updateTask} from './src/utils/todoService';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    const fetchTasks = async () => {
-      setTasks(await getTasks());
-    };
+  const fetchTasks = async () => {
+    setTasks(await getTasks());
+  };
 
+  useEffect(() => {
     fetchTasks();
   }, []);
 
@@ -21,7 +21,13 @@ const App = () => {
         keyExtractor={(task) => task.id}
         renderItem={({item}) => (
           <View style={styles.containerViewStyle}>
-            <CheckBox value={item.isCompleted} />
+            <CheckBox
+              value={item.isCompleted}
+              onValueChange={async (newValue) => {
+                await updateTask(item.id, {isCompleted: newValue});
+                await fetchTasks();
+              }}
+            />
             <Text style={styles.textStyle}>{item.title}</Text>
           </View>
         )}
