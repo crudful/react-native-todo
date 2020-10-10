@@ -1,5 +1,7 @@
 # React Native Todo
 
+<img src="https://www.crudful.com/react-native-todo.png" width="240" />
+
 ## Design decisions
 
 - Use React Native CLI instead of Expo CLI
