@@ -48,6 +48,11 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(si
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*react_native\\(_ios\\)?_\\(oss\\|fb\\)[a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
+module.file_ext=.js
+module.file_ext=.native.js
+module.file_ext=.android.js
+module.file_ext=.ios.js
+
 [lints]
 sketchy-null-number=warn
 sketchy-null-mixed=warn

@@ -27,4 +27,15 @@ const updateTask = async (id, data) => {
   }
 };
 
-export {getTasks, updateTask};
+const deleteTask = async (id) => {
+  try {
+    await fetch(`https://todo.crudful.com/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {cfAccessKey: cfAccessKey, 'Content-Type': 'application/json'},
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export {getTasks, updateTask, deleteTask};
