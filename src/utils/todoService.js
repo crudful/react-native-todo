@@ -1,5 +1,19 @@
 const cfAccessKey = process.env.CFACCESSKEY;
 
+const createTask = async (data) => {
+  try {
+    let response = await fetch(`https://todo.crudful.com/tasks`, {
+      method: 'POST',
+      headers: {cfAccessKey: cfAccessKey, 'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    });
+    let task = await response.json();
+    return task;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const getTasks = async () => {
   try {
     let response = await fetch('https://todo.crudful.com/tasks', {
@@ -38,4 +52,4 @@ const deleteTask = async (id) => {
   }
 };
 
-export {getTasks, updateTask, deleteTask};
+export {createTask, getTasks, updateTask, deleteTask};
