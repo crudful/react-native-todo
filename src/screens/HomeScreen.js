@@ -1,9 +1,10 @@
 import React, {useCallback, useState, useLayoutEffect} from 'react';
 import {StyleSheet, FlatList} from 'react-native';
-import {List, Button, Dialog, Portal, TextInput} from 'react-native-paper';
+import {List} from 'react-native-paper';
 import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useFocusEffect} from '@react-navigation/native';
+import TaskDialog from '../components/TaskDialog';
 import {
   createTask,
   getTasks,
@@ -13,13 +14,13 @@ import {
 
 const HomeScreen = ({navigation}) => {
   const [tasks, setTasks] = useState([]);
-  const [taskTitle, setTaskTitle] = useState('');
+  const [createTaskTitle, setCreateTaskTitle] = useState('');
   const [createTaskDialogVisible, setCreateTaskDialogVisible] = useState(false);
 
   const showCreateTaskDialog = () => setCreateTaskDialogVisible(true);
   const hideCreateTaskDialog = () => {
     setCreateTaskDialogVisible(false);
-    setTaskTitle('');
+    setCreateTaskTitle('');
   };
 
   const fetchTasks = async () => {
@@ -47,31 +48,18 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <>
-      <Portal>
-        <Dialog
-          visible={createTaskDialogVisible}
-          onDismiss={hideCreateTaskDialog}>
-          <Dialog.Title>Create Task</Dialog.Title>
-          <Dialog.Content>
-            <TextInput
-              label="Title"
-              value={taskTitle}
-              onChangeText={(title) => setTaskTitle(title)}
-            />
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button onPress={hideCreateTaskDialog}>Cancel</Button>
-            <Button
-              onPress={async () => {
-                await createTask({title: taskTitle});
-                await fetchTasks();
-                hideCreateTaskDialog();
-              }}>
-              Create
-            </Button>
-          </Dialog.Actions>
-        </Dialog>
-      </Portal>
+      <TaskDialog
+        visible={createTaskDialogVisible}
+        onDismiss={hideCreateTaskDialog}
+        titleValue={createTaskTitle}
+        onTitleChange={(title) => setCreateTaskTitle(title)}
+        onSubmit={async () => {
+          await createTask({title: createTaskTitle});
+          await fetchTasks();
+          hideCreateTaskDialog();
+        }}
+        submitText={'Create'}
+      />
       <FlatList
         data={tasks}
         keyExtractor={(task) => task.id}
