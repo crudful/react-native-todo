@@ -1,7 +1,6 @@
 # React Native Todo
 
-<img src="https://www.crudful.com/screenshots/react-native-todo-2.png" width="240" />
-<img src="https://www.crudful.com/screenshots/react-native-todo-3.png" width="240" />
+<img src="https://www.crudful.com/screenshots/react-native-todo-2.png" width="240" /> <img src="https://www.crudful.com/screenshots/react-native-todo-3.png" width="240" />
 
 ## Design decisions
 
