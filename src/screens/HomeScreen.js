@@ -15,12 +15,20 @@ import {
 const HomeScreen = ({navigation}) => {
   const [tasks, setTasks] = useState([]);
   const [createTaskTitle, setCreateTaskTitle] = useState('');
+  const [updateTaskId, setUpdateTaskId] = useState('');
+  const [updateTaskTitle, setUpdateTaskTitle] = useState('');
   const [createTaskDialogVisible, setCreateTaskDialogVisible] = useState(false);
+  const [updateTaskDialogVisible, setUpdateTaskDialogVisible] = useState(false);
 
   const showCreateTaskDialog = () => setCreateTaskDialogVisible(true);
   const hideCreateTaskDialog = () => {
     setCreateTaskDialogVisible(false);
     setCreateTaskTitle('');
+  };
+
+  const hideUpdateTaskDialog = () => {
+    setUpdateTaskDialogVisible(false);
+    setUpdateTaskTitle('');
   };
 
   const fetchTasks = async () => {
@@ -60,6 +68,18 @@ const HomeScreen = ({navigation}) => {
         }}
         submitText={'Create'}
       />
+      <TaskDialog
+        visible={updateTaskDialogVisible}
+        onDismiss={hideUpdateTaskDialog}
+        titleValue={updateTaskTitle}
+        onTitleChange={(title) => setUpdateTaskTitle(title)}
+        onSubmit={async () => {
+          await updateTask(updateTaskId, {title: updateTaskTitle});
+          await fetchTasks();
+          hideUpdateTaskDialog();
+        }}
+        submitText={'Update'}
+      />
       <FlatList
         data={tasks}
         keyExtractor={(task) => task.id}
@@ -76,15 +96,28 @@ const HomeScreen = ({navigation}) => {
               />
             )}
             right={() => (
-              <Icon
-                name="closecircleo"
-                size={28}
-                color="#DC3545"
-                onPress={async () => {
-                  await deleteTask(item.id);
-                  await fetchTasks();
-                }}
-              />
+              <>
+                <Icon
+                  name="edit"
+                  size={28}
+                  color="#17A2B8"
+                  style={styles.updateIconStyle}
+                  onPress={async () => {
+                    setUpdateTaskId(item.id);
+                    setUpdateTaskTitle(item.title);
+                    setUpdateTaskDialogVisible(true);
+                  }}
+                />
+                <Icon
+                  name="closecircleo"
+                  size={28}
+                  color="#DC3545"
+                  onPress={async () => {
+                    await deleteTask(item.id);
+                    await fetchTasks();
+                  }}
+                />
+              </>
             )}
           />
         )}
@@ -95,6 +128,9 @@ const HomeScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   createIconStyle: {
+    marginRight: 9,
+  },
+  updateIconStyle: {
     marginRight: 9,
   },
 });
