@@ -14,11 +14,11 @@ import {
 const HomeScreen = ({navigation}) => {
   const [tasks, setTasks] = useState([]);
   const [taskTitle, setTaskTitle] = useState('');
-  const [addTaskDialogVisible, setAddTaskDialogVisible] = useState(false);
+  const [createTaskDialogVisible, setCreateTaskDialogVisible] = useState(false);
 
-  const showAddTaskDialog = () => setAddTaskDialogVisible(true);
-  const hideAddTaskDialog = () => {
-    setAddTaskDialogVisible(false);
+  const showCreateTaskDialog = () => setCreateTaskDialogVisible(true);
+  const hideCreateTaskDialog = () => {
+    setCreateTaskDialogVisible(false);
     setTaskTitle('');
   };
 
@@ -38,8 +38,8 @@ const HomeScreen = ({navigation}) => {
         <Icon
           name="pluscircleo"
           size={28}
-          style={styles.addIconStyle}
-          onPress={showAddTaskDialog}
+          style={styles.createIconStyle}
+          onPress={showCreateTaskDialog}
         />
       ),
     });
@@ -48,8 +48,10 @@ const HomeScreen = ({navigation}) => {
   return (
     <>
       <Portal>
-        <Dialog visible={addTaskDialogVisible} onDismiss={hideAddTaskDialog}>
-          <Dialog.Title>Add Task</Dialog.Title>
+        <Dialog
+          visible={createTaskDialogVisible}
+          onDismiss={hideCreateTaskDialog}>
+          <Dialog.Title>Create Task</Dialog.Title>
           <Dialog.Content>
             <TextInput
               label="Title"
@@ -58,14 +60,14 @@ const HomeScreen = ({navigation}) => {
             />
           </Dialog.Content>
           <Dialog.Actions>
-            <Button onPress={hideAddTaskDialog}>Cancel</Button>
+            <Button onPress={hideCreateTaskDialog}>Cancel</Button>
             <Button
               onPress={async () => {
                 await createTask({title: taskTitle});
                 await fetchTasks();
-                hideAddTaskDialog();
+                hideCreateTaskDialog();
               }}>
-              Add
+              Create
             </Button>
           </Dialog.Actions>
         </Dialog>
@@ -104,7 +106,7 @@ const HomeScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  addIconStyle: {
+  createIconStyle: {
     marginRight: 9,
   },
 });
