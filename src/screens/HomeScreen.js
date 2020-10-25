@@ -20,7 +20,6 @@ const HomeScreen = ({navigation}) => {
   const [createTaskDialogVisible, setCreateTaskDialogVisible] = useState(false);
   const [updateTaskDialogVisible, setUpdateTaskDialogVisible] = useState(false);
 
-  const showCreateTaskDialog = () => setCreateTaskDialogVisible(true);
   const hideCreateTaskDialog = () => {
     setCreateTaskDialogVisible(false);
     setCreateTaskTitle('');
@@ -48,7 +47,7 @@ const HomeScreen = ({navigation}) => {
           name="pluscircleo"
           size={28}
           style={styles.createIconStyle}
-          onPress={showCreateTaskDialog}
+          onPress={() => setCreateTaskDialogVisible(true)}
         />
       ),
     });
