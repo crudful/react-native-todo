@@ -14,17 +14,19 @@ import {
 
 const HomeScreen = ({navigation}) => {
   const [tasks, setTasks] = useState([]);
-  const [createTaskTitle, setCreateTaskTitle] = useState('');
-  const [updateTaskId, setUpdateTaskId] = useState('');
-  const [updateTaskTitle, setUpdateTaskTitle] = useState('');
-  const [createTaskDialogVisible, setCreateTaskDialogVisible] = useState(false);
-  const [updateTaskDialogVisible, setUpdateTaskDialogVisible] = useState(false);
 
+  // create
+  const [createTaskTitle, setCreateTaskTitle] = useState('');
+  const [createTaskDialogVisible, setCreateTaskDialogVisible] = useState(false);
   const hideCreateTaskDialog = () => {
-    setCreateTaskDialogVisible(false);
     setCreateTaskTitle('');
+    setCreateTaskDialogVisible(false);
   };
 
+  // update
+  const [updateTaskId, setUpdateTaskId] = useState('');
+  const [updateTaskTitle, setUpdateTaskTitle] = useState('');
+  const [updateTaskDialogVisible, setUpdateTaskDialogVisible] = useState(false);
   const hideUpdateTaskDialog = () => {
     setUpdateTaskDialogVisible(false);
     setUpdateTaskTitle('');
