@@ -32,6 +32,15 @@ const HomeScreen = ({navigation}) => {
     setUpdateTaskTitle('');
   };
 
+  // delete
+  const [deleteTaskId, setDeleteTaskId] = useState('');
+  const [deleteTaskTitle, setDeleteTaskTitle] = useState('');
+  const [deleteTaskDialogVisible, setDeleteTaskDialogVisible] = useState(false);
+  const hideDeleteTaskDialog = () => {
+    setDeleteTaskDialogVisible(false);
+    setDeleteTaskTitle('');
+  };
+
   const fetchTasks = async () => {
     setTasks(await getTasks());
   };
@@ -62,6 +71,7 @@ const HomeScreen = ({navigation}) => {
         onDismiss={hideCreateTaskDialog}
         titleValue={createTaskTitle}
         onTitleChange={(title) => setCreateTaskTitle(title)}
+        disabled={false}
         onSubmit={async () => {
           await createTask({title: createTaskTitle});
           await fetchTasks();
@@ -74,12 +84,25 @@ const HomeScreen = ({navigation}) => {
         onDismiss={hideUpdateTaskDialog}
         titleValue={updateTaskTitle}
         onTitleChange={(title) => setUpdateTaskTitle(title)}
+        disabled={false}
         onSubmit={async () => {
           await updateTask(updateTaskId, {title: updateTaskTitle});
           await fetchTasks();
           hideUpdateTaskDialog();
         }}
         submitText={'Update'}
+      />
+      <TaskDialog
+        visible={deleteTaskDialogVisible}
+        onDismiss={hideDeleteTaskDialog}
+        titleValue={deleteTaskTitle}
+        disabled={true}
+        onSubmit={async () => {
+          await deleteTask(deleteTaskId);
+          await fetchTasks();
+          hideDeleteTaskDialog();
+        }}
+        submitText={'Delete'}
       />
       <FlatList
         data={tasks}
@@ -114,8 +137,9 @@ const HomeScreen = ({navigation}) => {
                   size={28}
                   color="#DC3545"
                   onPress={async () => {
-                    await deleteTask(item.id);
-                    await fetchTasks();
+                    setDeleteTaskId(item.id);
+                    setDeleteTaskTitle(item.title);
+                    setDeleteTaskDialogVisible(true);
                   }}
                 />
               </>

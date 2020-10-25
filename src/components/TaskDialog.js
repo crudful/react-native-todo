@@ -6,6 +6,7 @@ const TaskDialog = ({
   onDismiss,
   titleValue,
   onTitleChange,
+  disabled,
   onSubmit,
   submitText,
 }) => {
@@ -18,6 +19,7 @@ const TaskDialog = ({
             label="Title"
             value={titleValue}
             onChangeText={onTitleChange}
+            disabled={disabled}
           />
         </Dialog.Content>
         <Dialog.Actions>
