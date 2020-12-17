@@ -1,7 +1,6 @@
 import React, {useCallback, useState, useLayoutEffect} from 'react';
 import {StyleSheet, FlatList} from 'react-native';
-import {List} from 'react-native-paper';
-import CheckBox from '@react-native-community/checkbox';
+import {List, Checkbox} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useFocusEffect} from '@react-navigation/native';
 import TaskDialog from '../components/TaskDialog';
@@ -111,10 +110,10 @@ const HomeScreen = ({navigation}) => {
           <List.Item
             title={item.title}
             left={() => (
-              <CheckBox
-                value={item.isCompleted}
-                onValueChange={async (newValue) => {
-                  await updateTask(item.id, {isCompleted: newValue});
+              <Checkbox.Android
+                status={item.isCompleted ? 'checked' : 'unchecked'}
+                onPress={async () => {
+                  await updateTask(item.id, {isCompleted: !item.isCompleted});
                   await fetchTasks();
                 }}
               />
