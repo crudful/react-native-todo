@@ -10,7 +10,8 @@
     "lint": "eslint ."
   },
   "//": [
-    "@react-native-community/masked-view is now @react-native-masked-view/masked-view (https://github.com/react-native-masked-view/masked-view/releases)"
+    "@react-native-community/masked-view is now @react-native-masked-view/masked-view (https://github.com/react-native-masked-view/masked-view/releases)",
+    "use @react-native-masked-view/masked-view when react navigation's documentation is updated (https://reactnavigation.org/docs/getting-started#installing-dependencies-into-a-bare-react-native-project)"
   ],
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
