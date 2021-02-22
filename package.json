@@ -27,7 +27,7 @@
     "react-native-vector-icons": "8.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.12.13",
+    "@babel/core": "7.12.17",
     "@babel/runtime": "7.12.13",
     "@react-native-community/eslint-config": "2.0.0",
     "@testing-library/jest-native": "3.4.3",
