@@ -1,4 +1,6 @@
-const cfAccessKey = process.env.CFACCESSKEY;
+// Please get access key from `https://www.crudful.com/account`
+// It should be similar to `f585826519f500fd2390363195c874d1f717fesa`
+const cfAccessKey = 'access-key-from-crudful-com';
 
 const createTask = async (data) => {
   try {

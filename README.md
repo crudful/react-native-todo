@@ -19,9 +19,8 @@ cd react-native-todo/
 
 npm install
 
-# `access key` should be similar to `f585826519f500fd2390363195c874d1f717fesa`
-# please copy yours from `account page`
-CFACCESSKEY="ACCESS_KEY_FROM_ACCOUNT_PAGE" npx react-native start --reset-cache
+# Set `cfAccessKey` in `src/utils/todoService.js`
+npx react-native start --reset-cache
 
 # open another terminal in `react-native-todo` directory
 npx react-native run-android
