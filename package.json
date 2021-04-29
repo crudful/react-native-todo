@@ -14,7 +14,7 @@
     "use @react-native-masked-view/masked-view when react navigation's documentation is updated (https://reactnavigation.org/docs/getting-started#installing-dependencies-into-a-bare-react-native-project)"
   ],
   "dependencies": {
-    "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/masked-view": "0.1.11",
     "@react-navigation/native": "5.9.4",
     "@react-navigation/stack": "5.14.4",
     "react": "17.0.2",
